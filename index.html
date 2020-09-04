@@ -1,48 +1,71 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <title>Password Generator</title>
 </head>
 <body>
-<div class="container">
-    <h1 class="title">Password Generator</h1>
-    <h3 class="password-display" id="passwordDisplay">password</h3>
-    <form id="passwordGeneratorForm" class="form">
-        <label for="characterAmountNumber">Number Of Characters</label>
-        <div class="character-amount-container">
-            <input
-                    type="range"
-                    min="1"
-                    max="50"
-                    value="10"
-                    id="characterAmountRange"
-            />
-            <input
-                    class="number-input"
-                    type="number"
-                    min="1"
-                    max="50"
-                    value="10"
-                    id="characterAmountNumber"
-            />
+    <div class="container">
+        <div class="logo-title-div">
+            <div class="logo"><p>LastPass</p></div>
+            <div class="title"><p>Password Generator</p></div>
         </div>
-
-        <label for="includeUppercase">Include Uppercase</label>
-        <input type="checkbox" id="includeUppercase" />
-
-        <label for="includeNumbers">Include Numbers</label>
-        <input type="checkbox" id="includeNumbers" />
-
-        <label for="includeSymbols">Include Symbols</label>
-        <input type="checkbox" id="includeSymbols" />
-
-        <button type="submit" class="btn">Generate Password</button>
-    </form>
-</div>
+        <div class="maindiv">
+            <div class="pwd-copy-gen">
+                
+                <input id="rand-pass" type="text" value = "">
+                <i id="copy" class="fas fa-copy"></i>
+                <i id="generate" class="fas fa-sync-alt"></i>
+            </div>
+            <hr>
+            <div class="pwd-strength">
+               
+            </div>
+            <form id="final-form">
+                
+                <div class="history">
+                    <a href="">SHOW HISTORY</a>
+                </div>
+                <div class="options">
+                    <div class="constraint1">
+                        <div id="pwd-length">
+                            <p style="color:#636d73">Password Length</p>
+                            <div style="margin-top: 1rem" class="character-amount-container">
+                                <input type="number" min="0" max="50" value="0" id="characterAmountNumber">
+                                <input type="range" min="0" max="50" value="0" id="characterAmountRange">
+                            </div> 
+                        </div> 
+                        <div id="radio-select">
+                            <input type="radio" id="easyToSay" name="preference">
+                            <label for="easyToSay" >Easy to say</label>
+                            <input type="radio" id="easyToRead" name="preference">
+                            <label for="easyToRead">Easy to read</label>
+                            <input type="radio" id="allCharacters" name="preference" checked>
+                            <label for="allCharacters">All characters</label>
+                        </div> 
+                    </div>
+                    <div class="constraint2">
+                        <input type="checkbox" id="upperCase" checked>
+                        <label for="upperCase">Uppercase</label>
+                        <input type="checkbox" id="lowerCase" checked>
+                        <label for="lowerCase">Lowercase</label>
+                        <input type="checkbox" id="numbers" checked>
+                        <label for="numbers">Numbers</label>
+                        <input type="checkbox" id="symbols" checked>
+                        <label for="symbols">Symbols</label>
+                    </div>
+                </div>
+            </form>
+            <div class="copy-btn">
+                <button style="font-family: 'righteous', cursive" >COPY PASSWORD</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
+ 
