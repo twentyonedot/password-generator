@@ -14,10 +14,10 @@ body{
 }
 
 
-.container{
+/* .container{
     
     
-}
+} */
 
 .logo-title-div{
     display: flex;
@@ -110,9 +110,9 @@ hr{
     margin-top: .75rem;
 }
 
-.pwd-strength{
+/* .pwd-strength{
     
-}
+} */
 
 .history{
     padding: 1rem;
