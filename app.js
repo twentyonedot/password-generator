@@ -1,14 +1,18 @@
+/* Selectors */
 const characterAmountNumber = document.getElementById('characterAmountNumber');
 const characterAmountRange = document.getElementById('characterAmountRange');
+
 const easyToSayEl = document.getElementById('easyToSay');
 const easyToReadEl = document.getElementById('easyToRead');
 const allCharactersEl = document.getElementById('allCharacters');
 
-const includeUpperCaseEl = document.getElementById('upperCase')
-const includeLowerCaseEl = document.getElementById('lowerCase')
-const includeNumbersEl = document.getElementById('numbers')
-const includeSymbolsEl = document.getElementById('symbols')
+const includeUpperCaseEl = document.getElementById('upperCase');
+const includeLowerCaseEl = document.getElementById('lowerCase');
+const includeNumbersEl = document.getElementById('numbers');
+const includeSymbolsEl = document.getElementById('symbols');
+
 const form = document.getElementById('final-form');
+
 const UPPER_CHAR_CODES = arrayLowToHigh(65, 90);
 
 const LOWER_CHAR_CODES = arrayLowToHigh(97, 122);
@@ -19,17 +23,26 @@ const SYMBOL_CHAR_CODES = arrayLowToHigh(33, 47)
                   .concat(arrayLowToHigh(123, 126));
 const passwordDisplay = document.getElementById('rand-pass');
 
-characterAmountNumber.addEventListener('input', syncCharacterAmount);
-characterAmountRange.addEventListener('input', syncCharacterAmount);
 
 
-function syncCharacterAmount(e){
-    const value = e.target.value;
+const generateBtn = document.getElementById('generate');
+const copyBtn = document.getElementById('copy');
 
-    characterAmountNumber.value = value;
-    characterAmountRange.value = value;
-}
+const generateIcon = document.getElementById('pwd-gen-icon');
+const copyIcon = document.getElementById('copy-icon');
 
+const pwdStrength1 = document.getElementById('pwd-strength-one');
+const pwdStrength2 = document.getElementById('pwd-strength-two');
+const pwdStrength3 = document.getElementById('pwd-strength-three');
+const pwdStrength4 = document.getElementById('pwd-strength-four');
+const pwdStrength5 = document.getElementById('pwd-strength-five');
+
+const divShowHide = document.getElementsByClassName('alert');
+const closeButton = document.getElementsByClassName('close-btn');
+
+
+
+/* EventListeners */
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     characterAmount = characterAmountNumber.value;
@@ -38,23 +51,14 @@ form.addEventListener('submit', (e) => {
     includeNumbers = includeNumbersEl.checked;
     includeSymbols = includeSymbolsEl.checked;
     const password = generatePassword(characterAmount, includeUpperCase, includeLowerCase, includeNumbers, includeSymbols);
-    passwordDisplay.value = password;
+    passwordDisplay.innerText = password;
 });
 
-characterAmountNumber.addEventListener('input', listen);
+characterAmountNumber.addEventListener('input', syncCharacterAmount);
+characterAmountRange.addEventListener('input', syncCharacterAmount);
+
+characterAmountNumber.addEventListener('submit', listen);
 characterAmountRange.addEventListener('input', listen);
-
-function listen(){
-    characterAmount = characterAmountNumber.value;
-    includeUpperCase = includeUpperCaseEl.checked;
-    includeLowerCase = includeLowerCaseEl.checked;
-    includeNumbers = includeNumbersEl.checked;
-    includeSymbols = includeSymbolsEl.checked;
-    const password = generatePassword(characterAmount, includeUpperCase, includeLowerCase, includeNumbers, includeSymbols);
-    
-    passwordDisplay.value = password;
-}
-
 
 easyToSayEl.addEventListener('change', (e) =>{
     includeNumbersEl.disabled = true; 
@@ -65,9 +69,7 @@ easyToSayEl.addEventListener('change', (e) =>{
     includeSymbolsEl.checked = false;
     listen();
 });
-
-/* easyToReadEl.addEventListener('change' ) */
-
+easyToReadEl.addEventListener('change', listen);
 allCharactersEl.addEventListener('change', (e) => {
     includeNumbersEl.disabled = false; 
     includeSymbolsEl.disabled = false;
@@ -82,8 +84,57 @@ includeUpperCaseEl.addEventListener('click', listen);
 includeLowerCaseEl.addEventListener('click', listen);
 includeNumbersEl.addEventListener('click', listen);
 includeSymbolsEl.addEventListener('click', listen);
-easyToReadEl.addEventListener('change', listen);
 
+generateBtn.addEventListener('click', listen);
+copyBtn.addEventListener('click', ()=>{
+    cpyToClip();
+    divShowHide[0].classList.remove('hide');
+    divShowHide[0].classList.add('show');
+    setTimeout(function(){
+        divShowHide[0].classList.add('hide');
+        divShowHide[0].classList.remove('show');
+    }, 3000);
+});
+
+generateIcon.addEventListener('click', listen);
+copyIcon.addEventListener('click', ()=>{
+    cpyToClip();
+    divShowHide[0].classList.remove('hide');
+    divShowHide[0].classList.add('show');
+    closeButton[0].addEventListener('click', ()=>{
+        divShowHide[0].classList.add('hide');
+        divShowHide[0].classList.remove('show');
+    })
+    closeButton[0].addEventListener('click', ()=>{
+        divShowHide[0].classList.add('hide');
+        divShowHide[0].classList.remove('show');
+    })
+    setTimeout(function(){
+        divShowHide[0].classList.add('hide');
+        divShowHide[0].classList.remove('show');
+    }, 3000);
+});
+
+
+
+/* Functions */
+function syncCharacterAmount(e){
+    const value = e.target.value;
+
+    characterAmountNumber.value = value;
+    characterAmountRange.value = value;
+}
+
+
+function listen(){
+    characterAmount = characterAmountNumber.value;
+    includeUpperCase = includeUpperCaseEl.checked;
+    includeLowerCase = includeLowerCaseEl.checked;
+    includeNumbers = includeNumbersEl.checked;
+    includeSymbols = includeSymbolsEl.checked;
+    const password = generatePassword(characterAmount, includeUpperCase, includeLowerCase, includeNumbers, includeSymbols);
+    passwordDisplay.innerText = password;
+}
 
 
 function generatePassword(characterAmount, includeUpperCase, includeLowerCase, includeNumbers, includeSymbols){
@@ -105,7 +156,7 @@ function generatePassword(characterAmount, includeUpperCase, includeLowerCase, i
 
         specialcase = passwordCharacters.join('');
         console.log(specialcase);
-        specialcase = specialcase.replace(/I/g, '').replace(/l/g, '').replace(/L/g, '').replace(/i/g, '').replace(/1/g, '').replace(/0/g,'').replace(/o/g,'').replace(/O/g, '').replace(/|/g, '');
+        specialcase = specialcase.replace(/I/g, 'J').replace(/l/g, 'm').replace(/L/g, 'M').replace(/i/g, 'j').replace(/1/g, '2').replace(/0/g,'9').replace(/o/g,'p').replace(/O/g, 'P');
         console.log(specialcase);
         return specialcase;
     }
@@ -120,3 +171,16 @@ function arrayLowToHigh(low, high){
     return array;
 }
 
+function cpyToClip(){
+    const textarea = document.createElement('textarea');
+    const password = passwordDisplay.value;
+
+    if(!password){
+        return;
+    }
+    textarea.value = password;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+}
