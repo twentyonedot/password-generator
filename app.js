@@ -87,32 +87,36 @@ includeSymbolsEl.addEventListener('click', listen);
 
 generateBtn.addEventListener('click', listen);
 copyBtn.addEventListener('click', ()=>{
-    cpyToClip();
-    divShowHide[0].classList.remove('hide');
-    divShowHide[0].classList.add('show');
-    setTimeout(function(){
-        divShowHide[0].classList.add('hide');
-        divShowHide[0].classList.remove('show');
-    }, 3000);
+    if(passwordDisplay.innerText.length != 0){
+        cpyToClip();
+        divShowHide[0].classList.remove('hide');
+        divShowHide[0].classList.add('show');
+        setTimeout(function(){
+            divShowHide[0].classList.add('hide');
+            divShowHide[0].classList.remove('show');
+        }, 3000);
+    }
 });
 
 generateIcon.addEventListener('click', listen);
 copyIcon.addEventListener('click', ()=>{
-    cpyToClip();
-    divShowHide[0].classList.remove('hide');
-    divShowHide[0].classList.add('show');
-    closeButton[0].addEventListener('click', ()=>{
-        divShowHide[0].classList.add('hide');
-        divShowHide[0].classList.remove('show');
-    })
-    closeButton[0].addEventListener('click', ()=>{
-        divShowHide[0].classList.add('hide');
-        divShowHide[0].classList.remove('show');
-    })
-    setTimeout(function(){
-        divShowHide[0].classList.add('hide');
-        divShowHide[0].classList.remove('show');
-    }, 3000);
+    if(passwordDisplay.innerText.length != 0){
+        cpyToClip();
+        divShowHide[0].classList.remove('hide');
+        divShowHide[0].classList.add('show');
+        closeButton[0].addEventListener('click', ()=>{
+            divShowHide[0].classList.add('hide');
+            divShowHide[0].classList.remove('show');
+        })
+        closeButton[0].addEventListener('click', ()=>{
+            divShowHide[0].classList.add('hide');
+            divShowHide[0].classList.remove('show');
+        })
+        setTimeout(function(){
+            divShowHide[0].classList.add('hide');
+            divShowHide[0].classList.remove('show');
+        }, 3000);
+    }
 });
 
 
@@ -133,7 +137,7 @@ function listen(){
     includeNumbers = includeNumbersEl.checked;
     includeSymbols = includeSymbolsEl.checked;
     const password = generatePassword(characterAmount, includeUpperCase, includeLowerCase, includeNumbers, includeSymbols);
-    passwordDisplay.innerText = password;
+    passwordDisplay.innerHTML = password;
 }
 
 
@@ -158,9 +162,12 @@ function generatePassword(characterAmount, includeUpperCase, includeLowerCase, i
         console.log(specialcase);
         specialcase = specialcase.replace(/I/g, 'J').replace(/l/g, 'm').replace(/L/g, 'M').replace(/i/g, 'j').replace(/1/g, '2').replace(/0/g,'9').replace(/o/g,'p').replace(/O/g, 'P');
         console.log(specialcase);
-        return specialcase;
+        let ans = colouredFont(specialcase);
+        return ans;
     }
-    return passwordCharacters.join('');
+    let res = passwordCharacters.join('');
+    
+    return colouredFont(res);
 }
 
 function arrayLowToHigh(low, high){
@@ -173,14 +180,32 @@ function arrayLowToHigh(low, high){
 
 function cpyToClip(){
     const textarea = document.createElement('textarea');
-    const password = passwordDisplay.value;
-
-    if(!password){
-        return;
-    }
+    const password = passwordDisplay.innerText;
     textarea.value = password;
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand('copy');
     textarea.remove();
+}
+
+function colouredFont(res){
+    if(res.length == 0){
+        return res;
+    }
+    let alpha = res.match(/[a-zA-Z]/g);
+    let nums = res.match(/[0-9]/g);
+    console.log(nums);
+
+    let str = "";
+    let i = 0;
+    str = res.replace(/[a-zA-Z]/g, ()=>{
+        return `<span class="blaaack">${alpha[i++]}</span>`
+    });
+    let result = "";
+    let j = 0;
+    result = str.replace(/[0-9]/g, ()=>{
+        return `<span class="reed">${nums[j++]}</span>`
+    });
+    console.log(result);
+    return result;
 }

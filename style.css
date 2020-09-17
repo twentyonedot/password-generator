@@ -115,10 +115,12 @@ header{
     padding-left:1.2rem;
     background: #f3f4f7;
     font-size: 1.4rem;
+    
     outline:none;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
+    color: blue;
 }
 
 #pwd-gen-icon, #copy-icon{
@@ -250,4 +252,12 @@ header{
 
 #copy:focus{
     outline:0;
+}
+
+.reed{
+    color: red;
+}
+
+.blaaack{
+    color: black;
 }
