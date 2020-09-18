@@ -40,6 +40,12 @@ const pwdStrength5 = document.getElementById('pwd-strength-five');
 const divShowHide = document.getElementsByClassName('alert');
 const closeButton = document.getElementsByClassName('close-btn');
 
+const divS1 = document.getElementById('pwd-strength-one');
+const divS2 = document.getElementById('pwd-strength-two');
+const divS3 = document.getElementById('pwd-strength-three');
+const divS4 = document.getElementById('pwd-strength-four');
+const divS5 = document.getElementById('pwd-strength-five');
+
 
 
 /* EventListeners */
@@ -85,7 +91,10 @@ includeLowerCaseEl.addEventListener('click', listen);
 includeNumbersEl.addEventListener('click', listen);
 includeSymbolsEl.addEventListener('click', listen);
 
-generateBtn.addEventListener('click', listen);
+generateBtn.addEventListener('click', ()=>{
+    listen();
+    passStrength();
+});
 copyBtn.addEventListener('click', ()=>{
     if(passwordDisplay.innerText.length != 0){
         cpyToClip();
@@ -159,14 +168,11 @@ function generatePassword(characterAmount, includeUpperCase, includeLowerCase, i
     if(easyToReadEl.checked === true){
 
         specialcase = passwordCharacters.join('');
-        console.log(specialcase);
         specialcase = specialcase.replace(/I/g, 'J').replace(/l/g, 'm').replace(/L/g, 'M').replace(/i/g, 'j').replace(/1/g, '2').replace(/0/g,'9').replace(/o/g,'p').replace(/O/g, 'P');
-        console.log(specialcase);
         let ans = colouredFont(specialcase);
         return ans;
     }
     let res = passwordCharacters.join('');
-    
     return colouredFont(res);
 }
 
@@ -194,7 +200,6 @@ function colouredFont(res){
     }
     let alpha = res.match(/[a-zA-Z]/g);
     let nums = res.match(/[0-9]/g);
-    console.log(nums);
 
     let str = "";
     let i = 0;
@@ -206,6 +211,36 @@ function colouredFont(res){
     result = str.replace(/[0-9]/g, ()=>{
         return `<span class="reed">${nums[j++]}</span>`
     });
-    console.log(result);
     return result;
 }
+
+function passStrength(){
+    const pass = passwordDisplay.innerText;
+    const lowerAlpha = pass.match(/[a-z]/);
+    const upperAlpha = pass.match(/[A-Z]/);
+    const numb = pass.match(/[0-9]/);
+    const sym = pass.match(/[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E]/);
+
+    if(lowerAlpha!==null && upperAlpha!==null && numb!==null && pass.length > 12 && sym!==null){
+        divS1.classList.add('green');
+        divS2.classList.add('green');
+        divS3.classList.add('green');
+        divS4.classList.add('green');
+        divS5.classList.add('green');
+    }
+    else{
+        divS1.classList.remove('green');
+        divS2.classList.remove('green');
+        divS3.classList.remove('green');
+        divS4.classList.remove('green');
+        divS5.classList.remove('green');
+    }
+    console.log(pass.length);
+    if(pass.length < 7){
+        divS1.classList.add('red');
+    }
+    else{
+        divS1.classList.remove('red');
+    }
+}
+

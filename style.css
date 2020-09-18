@@ -261,3 +261,23 @@ header{
 .blaaack{
     color: black;
 }
+
+.red{
+    background-color: red;
+}
+
+.orange{
+    background-color: #f39c12;
+}
+
+.orangish{
+    background-color: #c0c760;
+}
+
+.greenish{
+    background-color: #79cc97;
+}
+
+.green{
+    background-color: green;
+}
