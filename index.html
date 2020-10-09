@@ -1,63 +1,88 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style2.css">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <script src="./app.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./app2.js" defer></script>
+    <title>Password Generator</title>
 </head>
 <body>
     <main>
-        <div class="alert hide">
+        <div  class="alert hide">
             <span class="fas fa-check"></span>
             <span class="msg"><Strong>Success:</strong> Password Copied</span>
             <span class="close-btn">
                 <span class="fas fa-times"></span>
             </span>
         </div>
-        <header>
-            <h2 id="logo">SecurePass 🔐</h2>
+        <!-- Title -->
+        <header id="hdr">
+            <h1 id="title">SecurePass</h1>
         </header>
-        <div id="pwd-input">
-            <!-- <input type="text" autofocus id="rand-pass" spellcheck="false" placeholder="Please enter a password... "> -->
-            <h3 id="rand-pass" contenteditable="true" spellcheck="false"></h3>
-            <i class="fas fa-copy fa-lg" id="copy-icon"></i>
-            <i class="fas fa-sync-alt fa-lg" id="pwd-gen-icon"></i>
+        
+        <!-- Password Display Div, copy, gen icons -->
+        <div id="pwdDisplayCopyGen">
+            <h3 id="pwdDisplay" contenteditable="true" spellcheck="false"></h3>
+            <span id="copyIconSpan"><i class="fas fa-copy fa-lg" id="copyIcon"></i></span>
+            <span id="pwdGenIconSpan"><i class="fas fa-sync-alt fa-lg" id="pwdGenIcon"></i></span>
         </div>
-        <div class="divider"></div>
-        <div id="pwd-strength">
-            <div id="pwd-strength-one" class=" strength"></div>
-            <div id="pwd-strength-two" class=" strength"></div>
-            <div id="pwd-strength-three" class=" strength"></div>
-            <div id="pwd-strength-four" class=" strength"></div>
-            <div id="pwd-strength-five" class=" strength"></div>
+
+        <hr>
+
+        <!-- Password Strength Meter -->
+        <div id="pwdStrength">
+            <div id="pwdStrengthOne" class="strength"></div>
+            <div id="pwdStrengthTwo" class=" strength"></div>
+            <div id="pwdStrengthThree" class=" strength"></div>
+            <div id="pwdStrengthFour" class=" strength"></div>
+            <div id="pwdStrengthFive" class=" strength"></div>
         </div>
+
+        <!-- Password History -->
         <div id="history">
-            <button id="show-history">SHOW HISTORY</button>
+            <button id="showHistory">SHOW HISTORY</button>
         </div>
-        <form id="final-form" >
-            <div class="options">
-                <div class="constraint1">
-                    <div id="pwd-length">
-                        <p style="color:#636d73">Password Length</p>
+
+        <!-- Form Div with options -->
+        <form id="formDiv" >
+            <div id="options">
+                <div id="advPrefers">
+                    <!-- Password Length Div -->
+                    <div id="pwdLength">
+                        <p style="color:#636d73; font-size:1.2rem; padding:.5rem 0rem 0rem 1rem;">Password Length</p>
                         <div style="margin-top: 1rem" class="character-amount-container">
-                            <input type="number" min="0" maxlength="2" max="50" value="21" id="characterAmountNumber">
-                            <input type="range" min="0" max="50" value="21" id="characterAmountRange">
+                            <input type="number" min="0" maxlength="2" max="50" value="0" id="characterAmountNumber">
+                            <input type="range" min="0" max="50" value="0" id="characterAmountRange">
                         </div> 
                     </div> 
-                    <div id="radio-select">
+                    <!-- Radio Preferences -->
+                    <div id="radioSelect">
                         <input type="radio" id="easyToSay" name="preference">
-                        <label for="easyToSay" >Easy to say</label>
+                        <div>
+                            <label for="easyToSay" >Easy to say</label>
+                            <i class="fas fa-info-circle" data-tooltip="Avoid Numbers and Special Characters"></i>  
+                        </div>
                         <input type="radio" id="easyToRead" name="preference">
-                        <label for="easyToRead">Easy to read</label>
+                        <div>
+                            <label for="easyToRead">Easy to read</label>
+                            <i class="fas fa-info-circle" data-tooltip="Avoid ambigous characters like I,l,0,O"></i>
+                        </div>
                         <input type="radio" id="allCharacters" name="preference" checked>
-                        <label for="allCharacters">All characters</label>
+                        <div>
+                            <label for="allCharacters">All characters</label>
+                            <i class="fas fa-info-circle" data-tooltip="All character combination like !,7,h,K,II"></i>
+                        </div>
                     </div> 
                 </div>
-                <div class="constraint2">
-                    <input type="checkbox" id="upperCase" checked>
+                <!-- Checkbox Preferences -->
+                <div id="basicPrefers">
+                    <input type="checkbox" id="upperCase" checked >
                     <label for="upperCase">Uppercase</label>
                     <input type="checkbox" id="lowerCase" checked>
                     <label for="lowerCase">Lowercase</label>
@@ -68,12 +93,13 @@
                 </div>
             </div>
         </form>
-        <div id="generate-copy">
-            <div id="generate-btn">
-                <button id="generate">Generate Password</button>
+        <!-- Generate copy buttons -->
+        <div id="generateCopy">
+            <div id="copy">
+                <button id="copyBtn">Copy to clipboard</button>
             </div>
-            <div id="copy-btn">
-                <button id="copy">Copy to clipboard</button>
+            <div id="generate">
+                <button id="generateBtn">Generate Password</button>
             </div>
         </div>
     </main>
