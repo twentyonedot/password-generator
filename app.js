@@ -226,6 +226,8 @@ function generatePassword(characterAmount, includeUpperCase, includeLowerCase, i
     return colouredFont(res);
 }
 
+
+
 function cpyToClip(){
     const textarea = document.createElement('textarea');
     const password = pwdDisplay.innerText;
@@ -416,3 +418,18 @@ for(i = pwds.length-1; i >= 0; i--){
     pwdDateDiv.appendChild(documentFragment)
 }
 
+
+/* const placeholder = pwdDisplay.getAttribute('data-placeholder')
+
+(pwdDisplay.innerHTML === '') && (pwdDisplay.innerHTML = placeholder);
+
+
+pwdDisplay.addEventListener('focus', function(e) {
+    const value = e.target.innerHTML;
+    value === placeholder && (e.target.innerHTML = '');
+});
+
+pwdDisplay.addEventListener('blur', function(e) {
+    const value = e.target.innerHTML;
+    value === '' && (e.target.innerHTML = placeholder);
+}); */

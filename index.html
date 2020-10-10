@@ -28,7 +28,7 @@
         
         <!-- Password Display Div, copy, gen icons -->
         <div id="pwdDisplayCopyGen">
-            <h3 id="pwdDisplay" contenteditable="true" spellcheck="false"></h3>
+            <div contenteditable id="pwdDisplay"  data-placeholder="Please Enter a Password . . ."  spellcheck="false"></div>
             <span id="copyIconSpan"><i class="fas fa-copy fa-lg" id="copyIcon"></i></span>
             <span id="pwdGenIconSpan"><i class="fas fa-sync-alt fa-lg" id="pwdGenIcon"></i></span>
         </div>
@@ -78,8 +78,8 @@
                     <div id="pwdLength">
                         <p style="color:#636d73; font-size:1.2rem; padding:.5rem 0rem 0rem 1rem;">Password Length</p>
                         <div style="margin-top: 1rem" class="character-amount-container">
-                            <input type="number" min="0" maxlength="2" max="50" value="0" id="characterAmountNumber">
-                            <input type="range" min="0" max="50" value="0" id="characterAmountRange">
+                            <input type="number" min="0" maxlength="2" max="50" value="21" id="characterAmountNumber">
+                            <input type="range" min="0" max="50" value="21" id="characterAmountRange">
                         </div> 
                     </div> 
                     <!-- Radio Preferences -->
