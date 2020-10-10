@@ -154,10 +154,10 @@ includeSymbolsEl.addEventListener('click', ()=>{
 });
 
 generateBtn.addEventListener('click', ()=>{
+    listen();
+    passStrength();
     if(pwdDisplay.innerText.length!=0){
         generateRow()
-        listen();
-        passStrength();
     }
 });
 
@@ -166,10 +166,10 @@ copyBtn.addEventListener('click', ()=>{
 })
 
 pwdGenIcon.addEventListener('click', ()=>{
+    listen();
+    passStrength();
     if(pwdDisplay.innerText.length!=0){
         generateRow()
-        listen();
-        passStrength();
     }
 })
 copyIcon.addEventListener('click', ()=>{
