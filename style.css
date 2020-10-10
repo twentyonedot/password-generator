@@ -605,8 +605,8 @@ table{
 td:hover{
     overflow: scroll;
 }
-tr{
-    border:.5px solid black;
+table tbody tr{
+    border-bottom:.5px solid black;
 }
 td{
     letter-spacing: .06rem;
