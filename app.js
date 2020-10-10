@@ -3,12 +3,12 @@ const slider = document.getElementById('characterAmountRange')
 const numb = document.getElementById('characterAmountNumber')
 slider.addEventListener('input',()=>{
     let x = slider.value;
-    let color = `linear-gradient(90deg, rgb(38,200,64) ${2*x}%, rgb(23,23,23) ${2*x}%)`;
+    let color = `linear-gradient(90deg, rgb(0, 153, 255) ${2*x}%, rgb(23,23,23) ${2*x}%)`;
     slider.style.background = color;
 })
 numb.addEventListener('input',()=>{
     let x = numb.value;
-    let color = `linear-gradient(90deg, rgb(38,200,64) ${2*x}%, rgb(23,23,23) ${2*x}%)`;
+    let color = `linear-gradient(90deg, rgb(0, 153, 255) ${2*x}%, rgb(23,23,23) ${2*x}%)`;
     slider.style.background = color;
 })
 /*  */
