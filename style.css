@@ -604,6 +604,11 @@ table{
 
 td:hover{
     overflow: scroll;
+    
+}
+::-webkit-scrollbar{
+    height:0;
+    width:0;
 }
 table tbody tr{
     border-bottom:.5px solid black;
