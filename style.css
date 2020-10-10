@@ -21,8 +21,8 @@ main{
     height: 47rem;
     background: #171717;
     border-radius: 2rem;
-    box-shadow:-12px -12px 10px rgba(255, 255, 255, 0.034),  
-                12px 12px 10px rgba(0, 0, 0, 0.34);
+    box-shadow:-12px -12px 20px rgba(255, 255, 255, 0.048),  
+                12px 12px 20px rgba(0, 0, 0, 0.571);
 }
 
 #title{
@@ -126,8 +126,8 @@ main{
     position:relative;
     margin-right: 1rem;
     border-radius: 1rem;
-    box-shadow:-5px -5px 6px rgba(109, 103, 103, 0.11), 
-                5px 5px 6px rgba(0, 0, 0, 0.575);
+    box-shadow:-5px -5px 8px rgba(109, 103, 103, 0.11), 
+                5px 5px 8px rgba(0, 0, 0, 0.639);
 }
 #pwdGenIconSpan:active, #copyIconSpan:active{
     font-size: .9rem;
@@ -143,9 +143,7 @@ main{
 }
 
 
-#pwdGenIcon:active{
 
-}
 
 #pwdGenIcon, #copyIcon{
     color:rgb(160, 137, 137);
@@ -174,12 +172,25 @@ hr{
                 inset 3px 5px 10px rgba(0, 0, 0, 0.25);
 }
 
-#history{
-    margin-left: 24.5rem;
+#history-btns{
+    display:flex;
 }
 
+#history{
+    margin-left: 12.25rem;
+    flex:1;
+}
+
+#clearDiv{
+    margin-left: 1.5rem;
+    flex:1;     
+}
+
+
+
+
 /* Remove Default stylings */
-#showHistory {
+#showHistory, #clearHistory, #hideHistory {
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
     border: 0px solid transparent;
@@ -187,13 +198,13 @@ hr{
     height:3rem;
 }
 
-#showHistory:hover {
+#showHistory:hover, #clearHistory:hover, #hideHistory:hover {
     background: transparent;
     border: 0px solid transparent;
     text-shadow: 0px 0px 0px transparent;
 }
 
-#showHistory:active {
+#showHistory:active, #clearHistory:active, #hideHistory:active {
 outline: none;
 border: none;
 font-size: .9rem;
@@ -201,19 +212,46 @@ box-shadow: inset -5px -5px 4px rgba(222, 219, 219, 0.04),
             inset 5px 5px 4px rgba(0, 0, 0, 0.43);
 }
 
-#showHistory:focus {
+#showHistory:focus, #clearHistory:focus, #hideHistory:focus{
     outline: 0; 
 }
 /*  */
 
-#showHistory{
+#showHistory, #clearHistory, #hideHistory{
     width: 9rem;
     padding: .8rem;
     color:rgb(160, 137, 137);
     cursor: pointer;
     border-radius: 1rem;
-    box-shadow:-5px -5px 4px rgba(222, 219, 219, 0.04), 
-                5px 5px 4px rgba(0, 0, 0, 0.43);
+    box-shadow:-5px -5px 8px rgba(222, 219, 219, 0.04), 
+                5px 5px 8px rgba(0, 0, 0, 0.43);
+}
+
+#clearHistory{
+    width:9.2rem;
+}
+
+#hideHistory{
+    margin-right: 1.5rem;
+}
+
+#history-div{
+    position:absolute;
+    margin:1.5rem;
+    margin-top:0;
+    top:0;
+    width: 32rem;
+    height:19rem;    
+    background: #303446;     
+    border-radius: 1rem;
+    box-shadow: inset -10px -10px 10px rgba(255, 255, 255, 0.036), 
+                inset 10px 10px 10px rgba(0, 0, 0, 0.194);
+    z-index:10;
+    overflow-y: auto;
+}
+
+.show-hide, .hide-hide, .clear-hide, .hide-history-div{
+    display:none;
 }
 
 #options{
@@ -226,6 +264,10 @@ box-shadow: inset -5px -5px 4px rgba(222, 219, 219, 0.04),
     box-shadow: inset -10px -10px 10px rgba(255, 255, 255, 0.036), 
                 inset 10px 10px 10px rgba(0, 0, 0, 0.194);
 }
+#formDiv{
+    position: relative;
+}
+
 
 #options:before{
     content:'';
@@ -265,6 +307,7 @@ input[type=number]::-webkit-inner-spin-button {
     margin-right: .5rem;
     outline: none;
     -webkit-appearance:none;
+    -moz-appearance: textfield;
     background-color:#31354b;
     border:0;
     border-radius: 1rem;
@@ -278,6 +321,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type='range']{
     -webkit-appearance: none;
+    -moz-appearance: none;
     width: 140px;
     height:15px;
     background:#111;
@@ -357,9 +401,7 @@ input:checked[type="radio"]:before{
     padding: 1rem;
 }
 
-input[type="checkbox"]:after{
-    
-}
+
 
 input[type="checkbox"]:disabled:before{
     background:#171717;
@@ -543,3 +585,45 @@ input:checked[type="checkbox"]:before{
                 inset 5px 5px 4px rgba(0, 0, 0, 0.43);
 }
 
+table thead th{
+    padding:1rem;
+    text-align:center;
+    color:rgb(16, 13, 13);
+    background: #f5bd4f;
+    position: sticky;
+    top:0px;
+}
+
+
+
+table{
+    table-layout: fixed;
+    width:32rem;
+    border-collapse:collapse;
+}
+
+td:hover{
+    overflow: scroll;
+}
+tr{
+    border:.5px solid black;
+}
+td{
+    letter-spacing: .08rem;
+    text-align: center;
+    color:#ebdad6;    
+    border:none;
+    padding:1rem;
+    padding-left:2rem;
+    overflow:hidden;
+    line-height:10px;
+    white-space: nowrap;
+    width:150px
+}
+tr:hover{
+    background:rgba(128, 128, 128, 0.31);    
+}
+
+thead tr:hover{
+    background:#605b63;
+}

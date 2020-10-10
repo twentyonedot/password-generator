@@ -20,10 +20,40 @@ const pwdDisplay = document.getElementById('pwdDisplay')
 const copyIcon = document.getElementById('copyIconSpan')
 const pwdGenIcon = document.getElementById('pwdGenIconSpan')
 
+const showHistory = document.getElementById('showHistory')
+const clearHistory = document.getElementById('clearHistory')
+const hideHistory = document.getElementById('hideHistory')
+const historyDiv = document.getElementById('history-div')
+const pwdDateDiv = document.getElementById('pwdDateDiv')
+showHistory.addEventListener('click',()=>{
+    clearHistory.classList.remove('clear-hide')
+    hideHistory.classList.remove('hide-hide')
+    showHistory.classList.add('show-hide')
+    historyDiv.classList.remove('hide-history-div')
+})
+
+hideHistory.addEventListener('click', ()=>{
+    hideHistory.classList.add('hide-hide')
+    showHistory.classList.remove('show-hide')
+    clearHistory.classList.add('clear-hide')
+    historyDiv.classList.add('hide-history-div')
+})
+
+clearHistory.addEventListener('click', ()=>{
+    pwds.splice(0, pwds.length)
+    dates.splice(0, dates.length)
+    localStorage.clear()
+    pwdDateDiv.innerHTML = ""
+})
+
+
 const characterAmountNumber = document.getElementById('characterAmountNumber')
 const characterAmountRange = document.getElementById('characterAmountRange')
 
 const form = document.getElementById('formDiv')
+form.addEventListener('submit',(e)=>{
+    e.preventDefault()
+})
 const easyToSayEl = document.getElementById('easyToSay')
 const easyToReadEl = document.getElementById('easyToRead')
 const allCharactersEl = document.getElementById('allCharacters')
@@ -69,7 +99,7 @@ characterAmountNumber.addEventListener('input',(e)=>{
         passStrength();
     }
 })
-characterAmountRange.addEventListener('input', (e)=>{
+characterAmountRange.addEventListener('input', (e)=>{   
     syncCharacterAmount(e);
     listen();
     passStrength();
@@ -133,7 +163,10 @@ copyBtn.addEventListener('click', ()=>{
 })
 
 pwdGenIcon.addEventListener('click', ()=>{
-    listen();
+    if(pwdDisplay.innerText.length!=0){
+        generateRow()
+        listen();
+    }
 })
 copyIcon.addEventListener('click', ()=>{
     alertFun()
@@ -313,5 +346,69 @@ function remCls(){
     pwdStrengthFive.classList.remove('dark-green');
 }
 
+function generateDate(){
+    let x = new Date();
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    return months[x.getMonth()] + " " + x.getDate() + ", " + x.getFullYear() +", " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds();
+}
 
+
+
+
+
+let pwds = []
+let dates = []
+
+if(JSON.parse(localStorage.getItem("pwds"))){
+    pwds = JSON.parse(localStorage.getItem("pwds"))
+}
+if(JSON.parse(localStorage.getItem("dates"))){
+    dates = JSON.parse(localStorage.getItem("dates"))
+}
+
+/* localStorage.setItem('pwds_local', JSON.stringify(pwds_local))
+localStorage.setItem('dates_local', JSON.stringify(dates_local))
+
+JSON.parse(localStorage.getItem("pwds_local"))
+JSON.parse(localStorage.getItem("dates_local")) */
+function generateRow(){
+    pwdDateDiv.innerHTML = "";
+    let curr_date = generateDate();
+    let curr_pass= pwdDisplay.innerText;
+    if(pwds.length == 20){
+        pwds.shift()
+    }
+    if(dates.length == 20){
+        dates.shift()
+    }
+    pwds.push(curr_pass);
+    dates.push(curr_date);
+    for(i = pwds.length-1; i >= 0; i--){
+        let documentFragment = document.createDocumentFragment();
+        let tbRow = document.createElement('tr');
+        documentFragment.appendChild(tbRow);
+        let td1 = document.createElement('td')
+        td1.innerText = pwds[i];
+        td2 = document.createElement('td')
+        td2.innerText = dates[i]
+        tbRow.appendChild(td1);
+        tbRow.appendChild(td2);
+        pwdDateDiv.appendChild(documentFragment)
+    }
+    localStorage.setItem("pwds",JSON.stringify(pwds))
+    localStorage.setItem("dates",JSON.stringify(dates))
+}
+
+for(i = pwds.length-1; i >= 0; i--){
+    let documentFragment = document.createDocumentFragment();
+    let tbRow = document.createElement('tr');
+    documentFragment.appendChild(tbRow);
+    let td1 = document.createElement('td')
+    td1.innerText = pwds[i];
+    td2 = document.createElement('td')
+    td2.innerText = dates[i]
+    tbRow.appendChild(td1);
+    tbRow.appendChild(td2);
+    pwdDateDiv.appendChild(documentFragment)
+}
 

@@ -45,12 +45,33 @@
         </div>
 
         <!-- Password History -->
-        <div id="history">
-            <button id="showHistory">SHOW HISTORY</button>
+        <div id="history-btns">
+            <div id="clearDiv">
+                <button class="clear-hide" id="clearHistory">CLEAR HISTORY</button>
+            </div>
+            <div id="history">
+                <button id="showHistory" >SHOW HISTORY</button>
+            </div>
+            <div id="hideDiv">
+                <button id="hideHistory" class="hide-hide">HIDE HISTORY</button>
+            </div>
         </div>
-
+        
+        
         <!-- Form Div with options -->
         <form id="formDiv" >
+            <div id="history-div" class="hide-history-div"> 
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:16rem">Password</th>
+                            <th style="width:14rem">Date Generated</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pwdDateDiv">
+                    </tbody>
+                </table>
+            </div>
             <div id="options">
                 <div id="advPrefers">
                     <!-- Password Length Div -->
